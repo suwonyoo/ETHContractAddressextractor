@@ -107,12 +107,6 @@ def getDataofSeaport(contractname, target_methodID, contractaddress, offset):
         url_input = str(url_setting)
         print(url_input)
 
-        '''
-        func_dict = {"funcName":str(binary_functions[k]), "funcStartAddr": hex(f.addr), "funcEndAddr":hex(f.addr + f.size), "decompiledFuncCode": str(str(code))}
-            if func_dict not in jsondata["funcInfo"]:
-                jsondata["funcInfo"].append(func_dict)
-        '''
-
         # save raw data by using etherscan.api
         with urllib.request.urlopen(url_input) as url:
             data = json.loads(url.read().decode())
