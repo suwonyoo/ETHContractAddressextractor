@@ -9,6 +9,7 @@
 - [Opensea Wyvern V1] : Finding *Atomic Match_* and parsing input data
 - [Opensea Wyvern V2] : Finding *Atomic Match_* and parsing input data
 - [Opensea Seaport] : Finding *0xfb0f3ee1* and parsing 
+- update startblock
 
 ## TODO
 - somewhat unstable with a try-exception statement through indexError.
