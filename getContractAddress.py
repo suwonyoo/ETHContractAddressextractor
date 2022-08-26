@@ -16,7 +16,7 @@ OpenseaSeaport = {'contractname': 'OpenseaSeaport', 'target_methodID': '0xfb0f3e
 # get timestamp and NFT contract address of Wyvern1 Contract
 def getDataofWyvern1(contractname, target_methodID, contractaddress, offset):
     # initial setting
-    api_keys = 'IIXBBGCIE2I1IWST5IF8KDVDXICE1UYFU2'
+    api_keys = ''
     startblock = 0
     endblock = 999999999
     jsondata = OrderedDict()
@@ -56,7 +56,7 @@ def getDataofWyvern1(contractname, target_methodID, contractaddress, offset):
 # get timestamp and NFT contract address of Wyvern2 Contract
 def getDataofWyvern2(contractname, target_methodID, contractaddress, offset):
     # initial setting
-    api_keys = 'IIXBBGCIE2I1IWST5IF8KDVDXICE1UYFU2'
+    api_keys = ''
     startblock = 0
     endblock = 999999999
     jsondata = OrderedDict()
@@ -96,7 +96,7 @@ def getDataofWyvern2(contractname, target_methodID, contractaddress, offset):
 # get timestamp and NFT contract address of Seaport Contract
 def getDataofSeaport(contractname, target_methodID, contractaddress, offset):
     # initial setting
-    api_keys = 'IIXBBGCIE2I1IWST5IF8KDVDXICE1UYFU2'
+    api_keys = ''
     startblock = 0
     endblock = 999999999
     jsondata = OrderedDict()
