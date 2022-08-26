@@ -47,8 +47,9 @@ def getDataofWyvern1(contractname, target_methodID, contractaddress, offset):
             startblock = data["result"][offset-1]['blockNumber']
 
             # write json file
-            with open('./'+str(contractname)+'/output_'+str(contractname)+'_'+str(i)+'.json', 'w') as f:
+            with open('./'+str(contractname)+'/output_'+str(contractname)+'_'+str(filenum)+'.json', 'w') as f:
                 json.dump(jsondata, f, indent=4)
+    filenum = filenum + 1
 
 # get timestamp and NFT contract address of Wyvern2 Contract
 def getDataofWyvern2(contractname, target_methodID, contractaddress, offset):
@@ -63,7 +64,8 @@ def getDataofWyvern2(contractname, target_methodID, contractaddress, offset):
     while 1:
         # initialize data
         num_count = 0
-        currentindex = 0 
+        currentindex = 0
+        filenum = 0
 
         # update url by endblock
         url_setting = 'https://api.etherscan.io/api?module=account&action=txlist&address='+str(contractaddress)+'&startblock='+str(startblock)+'&endblock='+str(endblock)+'&page=1&offset='+str(offset)+'&sort=asc&apikey='+str(api_keys)
@@ -84,8 +86,9 @@ def getDataofWyvern2(contractname, target_methodID, contractaddress, offset):
             startblock = data["result"][offset-1]['blockNumber']
 
             # write json file
-            with open('./'+str(contractname)+'/output_'+str(contractname)+'_'+str(i)+'.json', 'w') as f:
+            with open('./'+str(contractname)+'/output_'+str(contractname)+'_'+str(filenum)+'.json', 'w') as f:
                 json.dump(jsondata, f, indent=4)
+    filenum = filenum + 1
 
 # get timestamp and NFT contract address of Seaport Contract
 def getDataofSeaport(contractname, target_methodID, contractaddress, offset):
@@ -120,9 +123,9 @@ def getDataofSeaport(contractname, target_methodID, contractaddress, offset):
             startblock = data["result"][offset-1]['blockNumber']
 
             # write json file
-            with open('./'+str(contractname)+'/output_'+str(contractname)+'_'+str(i)+'.json', 'w') as f:
+            with open('./'+str(contractname)+'/output_'+str(contractname)+'_'+str(filenum)+'.json', 'w') as f:
                 json.dump(jsondata, f, indent=4)
-
+    filenum = filenum + 1
 try:
     getDataofWyvern1(WyvernV1.get('contractname'), WyvernV1.get('target_methodID'), WyvernV1.get('contractaddress'), 10000)
 except IndexError :
