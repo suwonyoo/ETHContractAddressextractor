@@ -51,7 +51,7 @@ def getDataofWyvern1(contractname, target_methodID, contractaddress, offset):
             # write json file
             with open('./'+str(contractname)+'/output_'+str(contractname)+'_'+str(filenum)+'.json', 'w') as f:
                 json.dump(jsondata, f, indent=4)
-    filenum = filenum + 1
+        filenum = filenum + 1
 
 # get timestamp and NFT contract address of Wyvern2 Contract
 def getDataofWyvern2(contractname, target_methodID, contractaddress, offset):
@@ -91,7 +91,7 @@ def getDataofWyvern2(contractname, target_methodID, contractaddress, offset):
             # write json file
             with open('./'+str(contractname)+'/output_'+str(contractname)+'_'+str(filenum)+'.json', 'w') as f:
                 json.dump(jsondata, f, indent=4)
-    filenum = filenum + 1
+     filenum = filenum + 1
 
 # get timestamp and NFT contract address of Seaport Contract
 def getDataofSeaport(contractname, target_methodID, contractaddress, offset):
@@ -129,7 +129,7 @@ def getDataofSeaport(contractname, target_methodID, contractaddress, offset):
             # write json file
             with open('./'+str(contractname)+'/output_'+str(contractname)+'_'+str(filenum)+'.json', 'w') as f:
                 json.dump(jsondata, f, indent=4)
-    filenum = filenum + 1
+        filenum = filenum + 1
 try:
     getDataofWyvern1(WyvernV1.get('contractname'), WyvernV1.get('target_methodID'), WyvernV1.get('contractaddress'), 10000)
 except IndexError :
