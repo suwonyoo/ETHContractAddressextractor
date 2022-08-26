@@ -11,5 +11,8 @@
 - [Opensea Seaport] : Finding *0xfb0f3ee1* and parsing 
 - update startblock
 
+# How To use
+- You should get Etherscan API via Etherscan.io
+
 ## TODO
 - somewhat unstable with a try-exception statement through indexError.
