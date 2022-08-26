@@ -16,17 +16,19 @@ OpenseaSeaport = {'contractname': 'OpenseaSeaport', 'target_methodID': '0xfb0f3e
 # get timestamp and NFT contract address of Wyvern1 Contract
 def getDataofWyvern1(contractname, target_methodID, contractaddress, offset):
     # initial setting
-    api_keys = ''
+    api_keys = 'IIXBBGCIE2I1IWST5IF8KDVDXICE1UYFU2'
     startblock = 0
     endblock = 999999999
     jsondata = OrderedDict()
     jsondata["NFTdata"] = list()
-
+    filenum = 0
+    
     # except case should be shown by IndexError
     while 1:
         # initialize data
         num_count = 0
         currentindex = 0 
+        
 
         # update url by endblock
         url_setting = 'https://api.etherscan.io/api?module=account&action=txlist&address='+str(contractaddress)+'&startblock='+str(startblock)+'&endblock='+str(endblock)+'&page=1&offset='+str(offset)+'&sort=asc&apikey='+str(api_keys)
@@ -54,18 +56,19 @@ def getDataofWyvern1(contractname, target_methodID, contractaddress, offset):
 # get timestamp and NFT contract address of Wyvern2 Contract
 def getDataofWyvern2(contractname, target_methodID, contractaddress, offset):
     # initial setting
-    api_keys = ''
+    api_keys = 'IIXBBGCIE2I1IWST5IF8KDVDXICE1UYFU2'
     startblock = 0
     endblock = 999999999
     jsondata = OrderedDict()
     jsondata["NFTdata"] = list()
+    filenum = 0
 
     # except case should be shown by IndexError
     while 1:
         # initialize data
         num_count = 0
         currentindex = 0
-        filenum = 0
+    
 
         # update url by endblock
         url_setting = 'https://api.etherscan.io/api?module=account&action=txlist&address='+str(contractaddress)+'&startblock='+str(startblock)+'&endblock='+str(endblock)+'&page=1&offset='+str(offset)+'&sort=asc&apikey='+str(api_keys)
@@ -93,17 +96,18 @@ def getDataofWyvern2(contractname, target_methodID, contractaddress, offset):
 # get timestamp and NFT contract address of Seaport Contract
 def getDataofSeaport(contractname, target_methodID, contractaddress, offset):
     # initial setting
-    api_keys = ''
+    api_keys = 'IIXBBGCIE2I1IWST5IF8KDVDXICE1UYFU2'
     startblock = 0
     endblock = 999999999
     jsondata = OrderedDict()
     jsondata["NFTdata"] = list()
+    filenum = 0
 
     # except case should be shown by IndexError
     while 1:
         # initialize data
         num_count = 0
-        currentindex = 0 
+        currentindex = 0
 
         # update url by endblock
         url_setting = 'https://api.etherscan.io/api?module=account&action=txlist&address='+str(contractaddress)+'&startblock='+str(startblock)+'&endblock='+str(endblock)+'&page=1&offset='+str(offset)+'&sort=asc&apikey='+str(api_keys)
