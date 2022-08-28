@@ -19,16 +19,14 @@ def getDataofWyvern1(contractname, target_methodID, contractaddress, offset):
     api_keys = ''
     startblock = 0
     endblock = 999999999
-    jsondata = OrderedDict()
-    jsondata["NFTdata"] = list()
     filenum = 0
-    
-    # except case should be shown by IndexError
+    jsondata = OrderedDict()
+
     while 1:
         # initialize data
-        num_count = 0
-        currentindex = 0 
-        
+        finalindex = 0
+        currentindex = 0
+        count = 0
 
         # update url by endblock
         url_setting = 'https://api.etherscan.io/api?module=account&action=txlist&address='+str(contractaddress)+'&startblock='+str(startblock)+'&endblock='+str(endblock)+'&page=1&offset='+str(offset)+'&sort=asc&apikey='+str(api_keys)
@@ -39,19 +37,33 @@ def getDataofWyvern1(contractname, target_methodID, contractaddress, offset):
         # save raw data by using etherscan.api
         with urllib.request.urlopen(url_input) as url:
             data = json.loads(url.read().decode())
+            endnumber = len(data["result"])
+
+            # writing startblock
+            jsondata["startblock"] = str(startblock)
+            
+            # initialized dictionary
+            selecteddata = {}
+            jsondata["NFTdata"] = list()
+
             # classfiy by methodId
-            while num_count<offset:
+            while currentindex<endnumber:
                 if data["result"][currentindex]['methodId'] == target_methodID and data["result"][currentindex]['isError'] == str(0):
                     selecteddata = {"timestamp" : data["result"][currentindex]['timeStamp'], "nftContractAddress" : '0x'+data["result"][currentindex]['input'][290:330]}
                     jsondata["NFTdata"].append(selecteddata)
-                num_count = num_count + 1
-                currentindex = currentindex + 1
-            startblock = data["result"][offset-1]['blockNumber']
+                    count = count + 1
+                    finalindex = currentindex
+                currentindex = currentindex + 1   
+
+            # setting startblock and endblock
+            jsondata["endblock"] = str(data["result"][finalindex]['blockNumber'])
+            jsondata["count"] = str(count)
+            startblock = data["result"][finalindex]['blockNumber']
 
             # write json file
             with open('./'+str(contractname)+'/output_'+str(contractname)+'_'+str(filenum)+'.json', 'w') as f:
                 json.dump(jsondata, f, indent=4)
-        filenum = filenum + 1
+                filenum = filenum +1
 
 # get timestamp and NFT contract address of Wyvern2 Contract
 def getDataofWyvern2(contractname, target_methodID, contractaddress, offset):
@@ -59,16 +71,14 @@ def getDataofWyvern2(contractname, target_methodID, contractaddress, offset):
     api_keys = ''
     startblock = 0
     endblock = 999999999
-    jsondata = OrderedDict()
-    jsondata["NFTdata"] = list()
     filenum = 0
+    jsondata = OrderedDict()
 
-    # except case should be shown by IndexError
     while 1:
         # initialize data
-        num_count = 0
+        finalindex = 0
         currentindex = 0
-    
+        count = 0
 
         # update url by endblock
         url_setting = 'https://api.etherscan.io/api?module=account&action=txlist&address='+str(contractaddress)+'&startblock='+str(startblock)+'&endblock='+str(endblock)+'&page=1&offset='+str(offset)+'&sort=asc&apikey='+str(api_keys)
@@ -79,58 +89,90 @@ def getDataofWyvern2(contractname, target_methodID, contractaddress, offset):
         # save raw data by using etherscan.api
         with urllib.request.urlopen(url_input) as url:
             data = json.loads(url.read().decode())
+            endnumber = len(data["result"])
+
+            # writing startblock
+            jsondata["startblock"] = str(startblock)
+            
+            # initialized dictionary
+            selecteddata = {}
+            jsondata["NFTdata"] = list()
+
             # classfiy by methodId
-            while num_count<offset:
+            while currentindex<endnumber:
                 if data["result"][currentindex]['methodId'] == target_methodID and data["result"][currentindex]['isError'] == str(0):
                     selecteddata = {"timestamp" : data["result"][currentindex]['timeStamp'], "nftContractAddress" : '0x'+data["result"][currentindex]['input'][3626:3666]}
                     jsondata["NFTdata"].append(selecteddata)
-                num_count = num_count + 1
-                currentindex = currentindex + 1
-            startblock = data["result"][offset-1]['blockNumber']
+                    count = count + 1
+                    finalindex = currentindex
+                currentindex = currentindex + 1   
+
+            # setting startblock and endblock
+            jsondata["endblock"] = str(data["result"][finalindex]['blockNumber'])
+            jsondata["count"] = str(count)
+            startblock = data["result"][finalindex]['blockNumber']
 
             # write json file
             with open('./'+str(contractname)+'/output_'+str(contractname)+'_'+str(filenum)+'.json', 'w') as f:
                 json.dump(jsondata, f, indent=4)
-     filenum = filenum + 1
+                filenum = filenum +1
+
+            if len(data["result"])==1:
+                exit()
+
 
 # get timestamp and NFT contract address of Seaport Contract
 def getDataofSeaport(contractname, target_methodID, contractaddress, offset):
-    # initial setting
+       # initial setting
     api_keys = ''
     startblock = 0
     endblock = 999999999
-    jsondata = OrderedDict()
-    jsondata["NFTdata"] = list()
     filenum = 0
+    jsondata = OrderedDict()
 
-    # except case should be shown by IndexError
     while 1:
         # initialize data
-        num_count = 0
+        finalindex = 0
         currentindex = 0
+        count = 0
 
         # update url by endblock
         url_setting = 'https://api.etherscan.io/api?module=account&action=txlist&address='+str(contractaddress)+'&startblock='+str(startblock)+'&endblock='+str(endblock)+'&page=1&offset='+str(offset)+'&sort=asc&apikey='+str(api_keys)
         url_input = str(url_setting)
         print(url_input)
 
+
         # save raw data by using etherscan.api
         with urllib.request.urlopen(url_input) as url:
             data = json.loads(url.read().decode())
+            endnumber = len(data["result"])
+
+            # writing startblock
+            jsondata["startblock"] = str(startblock)
+            
+            # initialized dictionary
+            selecteddata = {}
+            jsondata["NFTdata"] = list()
+
             # classfiy by methodId
-            while num_count<offset:
+            while currentindex<endnumber:
                 if data["result"][currentindex]['methodId'] == target_methodID and data["result"][currentindex]['isError'] == str(0):
                     selecteddata = {"timestamp" : data["result"][currentindex]['timeStamp'], "nftContractAddress" : '0x'+data["result"][currentindex]['input'][418:458]}
                     jsondata["NFTdata"].append(selecteddata)
-                num_count = num_count + 1
-                currentindex = currentindex + 1
-            startblock = data["result"][offset-1]['blockNumber']
+                    count = count + 1
+                    finalindex = currentindex
+                currentindex = currentindex + 1   
+
+            # setting startblock and endblock
+            jsondata["endblock"] = str(data["result"][finalindex]['blockNumber'])
+            jsondata["count"] = str(count)
+            startblock = data["result"][finalindex]['blockNumber']
 
             # write json file
             with open('./'+str(contractname)+'/output_'+str(contractname)+'_'+str(filenum)+'.json', 'w') as f:
                 json.dump(jsondata, f, indent=4)
-        filenum = filenum + 1
-try:
-    getDataofWyvern1(WyvernV1.get('contractname'), WyvernV1.get('target_methodID'), WyvernV1.get('contractaddress'), 10000)
-except IndexError :
-    getDataofWyvern2(WyvernV2.get('contractname'), WyvernV2.get('target_methodID'), WyvernV2.get('contractaddress'), 10000)
+                filenum = filenum +1
+
+            if len(data["result"])==1:
+                exit()
+
