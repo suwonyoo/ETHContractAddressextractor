@@ -123,7 +123,7 @@ def getDataofWyvern2(contractname, target_methodID, contractaddress, offset):
 
 # get timestamp and NFT contract address of Seaport Contract
 def getDataofSeaport(contractname, target_methodID, contractaddress, offset):
-       # initial setting
+    # initial setting
     api_keys = ''
     startblock = 0
     endblock = 999999999
@@ -135,6 +135,12 @@ def getDataofSeaport(contractname, target_methodID, contractaddress, offset):
         finalindex = 0
         currentindex = 0
         count = 0
+        
+        with open('./'+str(contractname)+'_endblock.txt', 'r') as g:
+            startblock = int(g.readline())
+
+        with open('./'+str(contractname)+'_filenum.txt', 'r') as h:
+            filenum = int(h.readline())
 
         # update url by endblock
         url_setting = 'https://api.etherscan.io/api?module=account&action=txlist&address='+str(contractaddress)+'&startblock='+str(startblock)+'&endblock='+str(endblock)+'&page=1&offset='+str(offset)+'&sort=asc&apikey='+str(api_keys)
@@ -157,11 +163,20 @@ def getDataofSeaport(contractname, target_methodID, contractaddress, offset):
             # classfiy by methodId
             while currentindex<endnumber:
                 if data["result"][currentindex]['methodId'] == target_methodID and data["result"][currentindex]['isError'] == str(0):
-                    selecteddata = {"timestamp" : data["result"][currentindex]['timeStamp'], "nftContractAddress" : '0x'+data["result"][currentindex]['input'][418:458]}
-                    jsondata["NFTdata"].append(selecteddata)
-                    count = count + 1
-                    finalindex = currentindex
+                    # WETH case
+                    if( data["result"][currentindex]["input"][418:458] == "c02aaa39b223fe8d0a0e5c4f27ead9083c756cc2"):
+                        selecteddata = {"inputlen" : str(len(data["result"][currentindex]['input']))
+                        ,"txhash" : data["result"][currentindex]["hash"], "contractaddress" : '0x'+data["result"][currentindex]["input"][99:139]}
+                        count = count + 1
+                        jsondata["NFTdata"] .append(selecteddata)
+                    else:
+                        selecteddata = {"inputlen" : str(len(data["result"][currentindex]['input']))
+                        ,"txhash" : data["result"][currentindex]["hash"], "contractaddress" : '0x'+data["result"][currentindex]["input"][418:458]}
+                        count = count + 1
+                        jsondata["NFTdata"] .append(selecteddata)
+                finalindex = currentindex
                 currentindex = currentindex + 1   
+                    
 
             # setting startblock and endblock
             jsondata["endblock"] = str(data["result"][finalindex]['blockNumber'])
@@ -173,6 +188,12 @@ def getDataofSeaport(contractname, target_methodID, contractaddress, offset):
                 json.dump(jsondata, f, indent=4)
                 filenum = filenum +1
 
-            if len(data["result"])==1:
-                exit()
+            with open('./'+str(contractname)+'_endblock.txt', 'w') as g:
+                g.truncate()
+                g.write(str(jsondata["endblock"]))
+            
+            with open('./'+str(contractname)+'_filenum.txt', 'w') as h:
+                h.truncate()
+                h.write(str(filenum))
+
 
